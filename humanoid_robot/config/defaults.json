@@ -1,0 +1,87 @@
+{
+  "robot": {
+    "name": "Humanoid Robot",
+    "wifi_ssid": "Humanoid-Robot",
+    "address": "10.42.0.1"
+  },
+  "web": {
+    "host": "0.0.0.0",
+    "port": 80
+  },
+  "servo_types": {
+    "MG996R": {"min_us": 500, "max_us": 2500, "range_deg": 180},
+    "MG90S":  {"min_us": 500, "max_us": 2400, "range_deg": 180}
+  },
+  "servos": {
+    "R_HIP":   {"channel": 0, "type": "MG996R", "home": 90, "min": 30, "max": 150, "invert": false, "trim": 0},
+    "R_KNEE":  {"channel": 1, "type": "MG996R", "home": 90, "min": 30, "max": 150, "invert": false, "trim": 0},
+    "R_ANKLE": {"channel": 2, "type": "MG996R", "home": 90, "min": 60, "max": 120, "invert": false, "trim": 0},
+    "L_HIP":   {"channel": 3, "type": "MG996R", "home": 90, "min": 30, "max": 150, "invert": true,  "trim": 0},
+    "L_KNEE":  {"channel": 4, "type": "MG996R", "home": 90, "min": 30, "max": 150, "invert": true,  "trim": 0},
+    "L_ANKLE": {"channel": 5, "type": "MG996R", "home": 90, "min": 60, "max": 120, "invert": false, "trim": 0},
+    "HEAD":    {"channel": 6, "type": "MG90S",  "home": 90, "min": 30, "max": 150, "invert": false, "trim": 0},
+    "R_ARM":   {"channel": 7, "type": "MG90S",  "home": 90, "min": 10, "max": 170, "invert": false, "trim": 0},
+    "L_ARM":   {"channel": 8, "type": "MG90S",  "home": 90, "min": 10, "max": 170, "invert": true,  "trim": 0}
+  },
+  "motion": {
+    "step_ms": 320,
+    "home_transition_ms": 600,
+    "max_speed_deg_per_s": 240,
+    "head_range_deg": 60,
+    "watchdog_ms": 500,
+    "auto_speed": 0.6
+  },
+  "thresholds": {
+    "obstacle_stop_cm": 25,
+    "obstacle_clear_cm": 40,
+    "temp_warning_c": 45,
+    "temp_danger_c": 57,
+    "gas_warmup_s": 120,
+    "gas_warning_rise_v": 0.4,
+    "gas_danger_rise_v": 0.8,
+    "gas_danger_absolute_v": 2.8,
+    "battery_warning_v": 13.6,
+    "battery_shutdown_v": 13.2,
+    "battery_shutdown_delay_s": 30,
+    "silence_s": 60
+  },
+  "calibration": {
+    "adc_vref": 3.3,
+    "mq2_divider_ratio": 1.5,
+    "battery_divider_ratio": 5.545
+  },
+  "camera": {
+    "enabled": true,
+    "width": 640,
+    "height": 480,
+    "fps": 15
+  },
+  "audio": {
+    "enabled": true,
+    "voice": "en",
+    "speed": 145,
+    "amplitude": 120,
+    "emergency_repeat_s": 15
+  },
+  "phrases": {
+    "greeting": "Hello! Humanoid Robot System activated. Initializing my systems. Please wait while I check my sensors and camera.",
+    "sensors_ok": "Sensors are online.",
+    "camera_ok": "Camera is ready.",
+    "ready": "I am ready to assist you.",
+    "ready_limited": "I am ready, but some functions are limited.",
+    "connect_info": "To control me, connect your phone to the Wi-Fi network {ssid}, then open {address} in the browser.",
+    "emergency": "Emergency! {reason}. Please move to a safe place.",
+    "warning": "Warning. {reason}.",
+    "obstacle": "Obstacle ahead.",
+    "estop_on": "Emergency stop activated.",
+    "estop_off": "Emergency stop released.",
+    "battery_low": "My battery is low. Please charge me soon.",
+    "battery_critical": "Battery critical. Shutting down to protect my memory card.",
+    "undervoltage": "Warning. My power supply voltage is too low.",
+    "mode_monitor": "Monitor mode.",
+    "mode_manual": "Manual control mode.",
+    "mode_auto": "Auto patrol mode.",
+    "shutdown": "Shutting down. Goodbye.",
+    "reboot": "Restarting now."
+  }
+}

@@ -1,0 +1,21 @@
+[Unit]
+Description=Humanoid Robot (sensors, alarms, walking, phone controller)
+After=network.target sound.target NetworkManager.service
+Wants=network.target
+# Never give up restarting the robot program
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/humanoid-robot
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=ROBOT_DATA_DIR=/var/lib/humanoid-robot
+ExecStart=/usr/bin/python3 /opt/humanoid-robot/main.py
+Restart=always
+RestartSec=3
+TimeoutStopSec=15
+Nice=-5
+
+[Install]
+WantedBy=multi-user.target

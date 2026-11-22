@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0e1116">
+  <title>Robot Settings</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span id="conn" class="dot"></span><a href="/">&larr; Controller</a></div>
+    <div class="badges">
+      <span id="state" class="badge">--</span>
+      <span id="sd" class="badge">SD --</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="card" aria-label="SD card protection">
+      <h2>SD card protection</h2>
+      <div id="sd-info" class="callout">Loading...</div>
+      <div class="row">
+        <button id="btn-maintenance" class="hidden">Switch to MAINTENANCE mode</button>
+        <button id="btn-protect" class="primary hidden">Switch to PROTECTED mode</button>
+      </div>
+      <h2>Power</h2>
+      <div class="row">
+        <button id="btn-reboot">Reboot</button>
+        <button id="btn-shutdown" class="danger">Shut down</button>
+      </div>
+      <p id="power-info" class="note"></p>
+    </section>
+
+    <section class="card" aria-label="Save settings">
+      <h2>Save</h2>
+      <div class="callout warn" id="save-hint">Changes below apply immediately for this session.</div>
+      <div class="row">
+        <button id="btn-apply">Apply (this session)</button>
+        <button id="btn-save" class="primary">Save permanently</button>
+      </div>
+      <p id="save-result" class="note" role="status"></p>
+      <p class="note">Settings source: <span id="source">-</span></p>
+    </section>
+
+    <section class="card" style="grid-column: 1 / -1" aria-label="Servo calibration">
+      <h2>Servo calibration</h2>
+      <div class="callout warn">
+        Put the robot on a stand with its feet off the table before testing servos.
+        Adjust <b>Trim</b> until each joint is straight in the home pose. Use <b>Test</b> to check the
+        direction: HIP + swings the leg forward, KNEE + bends the knee, ANKLE + tilts the body to the
+        robot's right, HEAD + turns left, ARM + raises the arm. If a joint moves the wrong way, tick
+        <b>Invert</b>.
+      </div>
+      <div class="row">
+        <button id="btn-hold">Hold servos (home pose)</button>
+        <button id="btn-relax">Relax servos (go limp)</button>
+      </div>
+      <div class="table-scroll">
+        <table class="servo-table">
+          <thead><tr><th>Joint</th><th>Ch</th><th>Angle</th><th>Trim</th><th>Test</th><th>Invert</th><th>Min</th><th>Max</th></tr></thead>
+          <tbody id="servo-rows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" aria-label="Alarm thresholds">
+      <h2>Alarm thresholds</h2>
+      <div id="thresholds" class="form-grid"></div>
+    </section>
+
+    <section class="card" aria-label="Walking">
+      <h2>Walking</h2>
+      <div id="motion" class="form-grid"></div>
+    </section>
+
+    <section class="card" aria-label="Startup checks">
+      <h2>Startup checks</h2>
+      <ul id="checks" class="list"></ul>
+    </section>
+  </main>
+  <div id="toast" class="toast hidden" role="status"></div>
+  <script src="/static/settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+# >>> humanoid-robot >>>
+# Added by humanoid_robot/system/install.sh - pin map in docs/WIRING.md
+[all]
+# PCA9685 servo driver (I2C1: GPIO2/GPIO3) and MCP3008 ADC (SPI0, CE0)
+dtparam=i2c_arm=on
+dtparam=spi=on
+# Speaker: MAX98357A I2S amp (BCLK GPIO18, LRC GPIO19, DIN GPIO21).
+# no-sdmode because the overlay's default SD pin (GPIO4) is the DHT22 pin.
+dtparam=audio=off
+dtoverlay=max98357a,no-sdmode
+# DHT22 temperature / humidity on GPIO4, read by the kernel driver
+dtoverlay=dht11,gpiopin=4
+# Shutdown button on GPIO27 (pin 13): hold for 2 seconds = clean shutdown
+dtoverlay=gpio-shutdown,gpio_pin=27,active_low=1,gpio_pull=up,debounce=2000
+# Hardware watchdog: reboots the Pi if it ever freezes
+dtparam=watchdog=on
+# 5 MP camera (OV5647) on the CSI ribbon connector
+camera_auto_detect=1
+# <<< humanoid-robot <<<

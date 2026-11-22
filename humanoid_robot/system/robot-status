@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+# robot-status: one-screen health check of the Humanoid Robot.
+#   sudo robot-status
+set -u
+
+ok()   { printf '  \033[32m[ OK ]\033[0m %s\n' "$*"; }
+warn() { printf '  \033[33m[WARN]\033[0m %s\n' "$*"; }
+bad()  { printf '  \033[31m[FAIL]\033[0m %s\n' "$*"; }
+
+if [ -d /boot/firmware ]; then BOOT=/boot/firmware; else BOOT=/boot; fi
+
+echo "== SD card protection =="
+if grep -q "boot=overlay" /proc/cmdline; then
+  ok "PROTECTED now: SD card is read-only, power can be switched off at any time"
+else
+  warn "MAINTENANCE now: SD card is writable - shut down before switching power off"
+fi
+if grep -q "boot=overlay" "$BOOT/cmdline.txt" 2>/dev/null; then
+  echo "         after next reboot: PROTECTED"
+else
+  echo "         after next reboot: MAINTENANCE"
+fi
+if findmnt -no OPTIONS "$BOOT" | tr ',' '\n' | grep -qx ro; then
+  ok "boot partition is read-only"
+else
+  warn "boot partition is writable"
+fi
+
+echo "== Power =="
+THROTTLED="$(vcgencmd get_throttled 2>/dev/null | cut -d= -f2)"
+if [ -n "$THROTTLED" ]; then
+  T=$((THROTTLED))
+  if (( T & 0x1 )); then bad "UNDER-VOLTAGE right now: 5 V supply too weak (cause of SD card damage!)"
+  elif (( T & 0x10000 )); then warn "under-voltage happened since boot (use thicker/shorter 5 V wires, 5.1 V supply)"
+  else ok "5 V supply OK (no under-voltage since boot)"; fi
+  if (( T & 0x4 )); then warn "CPU is being throttled right now"; fi
+fi
+TEMP="$(vcgencmd measure_temp 2>/dev/null | cut -d= -f2)"
+[ -n "$TEMP" ] && echo "         CPU temperature: $TEMP"
+
+echo "== Robot program =="
+if systemctl is-active --quiet humanoid-robot; then
+  ok "humanoid-robot service is running"
+else
+  bad "humanoid-robot service is NOT running  (see: journalctl -u humanoid-robot -n 50)"
+fi
+
+echo "== Hardware =="
+if command -v i2cdetect >/dev/null && i2cdetect -y 1 2>/dev/null | awk 'NR>1 {for (i=2;i<=NF;i++) if ($i=="40") f=1} END {exit !f}'; then
+  ok "PCA9685 servo driver found on I2C address 0x40"
+else
+  bad "PCA9685 not found on I2C bus 1 (check SDA pin 3, SCL pin 5, VCC 3.3 V, GND)"
+fi
+[ -e /dev/spidev0.0 ] && ok "SPI enabled (MCP3008 on CE0)" || bad "SPI not enabled (/dev/spidev0.0 missing)"
+if grep -qs "^dht11" /sys/bus/iio/devices/iio:device*/name; then
+  ok "DHT22 kernel driver loaded on GPIO4"
+else
+  bad "DHT22 driver not loaded (dtoverlay=dht11,gpiopin=4 missing in config.txt?)"
+fi
+if aplay -l 2>/dev/null | grep -qi "max98357"; then
+  ok "MAX98357A sound card present"
+else
+  bad "MAX98357A sound card missing (dtoverlay=max98357a,no-sdmode in config.txt?)"
+fi
+CAMTOOL="$(command -v rpicam-hello || command -v libcamera-hello || true)"
+if [ -n "$CAMTOOL" ]; then
+  if "$CAMTOOL" --list-cameras 2>/dev/null | grep -q "^[0-9] :"; then
+    ok "camera detected"
+  else
+    warn "no camera detected (ribbon cable? blue side toward the Ethernet port) - or it is streaming now"
+  fi
+fi
+
+echo "== Network =="
+nmcli -t -f NAME,DEVICE connection show --active 2>/dev/null | sed 's/^/         active: /'
+echo "         IP addresses: $(hostname -I 2>/dev/null)"
+echo "         Phone controller: http://10.42.0.1  (on the robot's own Wi-Fi)"

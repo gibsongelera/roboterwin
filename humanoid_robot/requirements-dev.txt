@@ -1,0 +1,4 @@
+# Only needed to run the simulator and tests on a PC.
+# On the Raspberry Pi everything comes from apt (see system/install.sh).
+aiohttp>=3.9
+pytest>=7

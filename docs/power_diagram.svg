@@ -1,0 +1,372 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" width="1600" height="1100" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+<title>Humanoid robot – power diagram</title>
+<desc>Power wiring: 4S 18650 pack with 4S 20 A BMS, 20 A fuse, XT60 and main switch, then a servo branch (SERVO E-STOP, 6 V buck, 1000 uF, distribution, PCA9685 V+), a Pi branch (5.1 V buck, 470 uF, Pi pins 2/4 and 5 V loads) and a battery-sense divider to MCP3008 CH1. Charger port to the BMS.</desc>
+<style>text{dominant-baseline:auto} .w{fill:none;stroke-linecap:round;stroke-linejoin:round}</style>
+<rect width="1600" height="1100" fill="#ffffff"/>
+<g id="background">
+</g><g id="components">
+<!-- Battery: 4 x 18650 in 4S + BMS -->
+<rect x="30" y="112" width="340" height="88" rx="8" fill="none" stroke="#ad1457" stroke-width="1.4" stroke-dasharray="6 4"/>
+<rect x="50" y="143" width="60" height="34" rx="6" fill="#fce4ec" stroke="#ad1457" stroke-width="1.6"/>
+<rect x="110" y="152" width="4" height="16" fill="#ad1457" stroke="#ad1457" stroke-width="1"/>
+<rect x="125" y="143" width="60" height="34" rx="6" fill="#fce4ec" stroke="#ad1457" stroke-width="1.6"/>
+<rect x="185" y="152" width="4" height="16" fill="#ad1457" stroke="#ad1457" stroke-width="1"/>
+<rect x="200" y="143" width="60" height="34" rx="6" fill="#fce4ec" stroke="#ad1457" stroke-width="1.6"/>
+<rect x="260" y="152" width="4" height="16" fill="#ad1457" stroke="#ad1457" stroke-width="1"/>
+<rect x="275" y="143" width="60" height="34" rx="6" fill="#fce4ec" stroke="#ad1457" stroke-width="1.6"/>
+<rect x="335" y="152" width="4" height="16" fill="#ad1457" stroke="#ad1457" stroke-width="1"/>
+<rect x="30" y="250" width="340" height="82" rx="6" fill="#ede7f6" stroke="#4527a0" stroke-width="2"/>
+<!-- 20 A fuse, XT60 connector, main switch -->
+<rect x="405" y="150" width="50" height="20" rx="3" fill="#fff8e1" stroke="#222" stroke-width="1.6"/>
+<line x1="405" y1="160" x2="455" y2="160" stroke="#222" stroke-width="1.4" stroke-linecap="round"/>
+<rect x="520" y="136" width="46" height="98" rx="6" fill="#fdd835" stroke="#8d6e00" stroke-width="1.6"/>
+<line x1="543" y1="175" x2="543" y2="195" stroke="#8d6e00" stroke-width="1" stroke-linecap="round"/>
+<circle cx="636" cy="160" r="4" fill="#fff" stroke="#222" stroke-width="1.6"/>
+<circle cx="694" cy="160" r="4" fill="#fff" stroke="#222" stroke-width="1.6"/>
+<line x1="640" y1="158" x2="690" y2="140" stroke="#222" stroke-width="2.4" stroke-linecap="round"/>
+<!-- Charger port to the BMS (P+ / P-) -->
+<rect x="30" y="380" width="270" height="78" rx="6" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="2"/>
+<!-- (a) SERVO E-STOP -> 6 V buck -> 1000 uF -> distribution -> PCA9685 V+ -> servos -->
+<circle cx="840" cy="160" r="4" fill="#fff" stroke="#222" stroke-width="1.6"/>
+<circle cx="920" cy="160" r="4" fill="#fff" stroke="#222" stroke-width="1.6"/>
+<line x1="836" y1="167" x2="924" y2="167" stroke="#222" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="880" y1="167" x2="880" y2="134" stroke="#222" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="4 3"/>
+<path d="M858,134 A22,20 0 0 1 902,134 Z" fill="#d32f2f" stroke="#7f0000" stroke-width="1.6"/>
+<rect x="866" y="132" width="28" height="6" fill="#fdd835" stroke="#8d6e00" stroke-width="1"/>
+<rect x="1000" y="120" width="150" height="130" rx="6" fill="#fbe9e7" stroke="#7f0000" stroke-width="2"/>
+<line x1="1179" y1="226" x2="1201" y2="226" stroke="#222" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M1179,237.0 Q1190,231.0 1201,237.0" fill="none" stroke="#222" stroke-width="2.4"/>
+<rect x="1230" y="120" width="125" height="130" rx="6" fill="#fbe9e7" stroke="#7f0000" stroke-width="2"/>
+<rect x="1395" y="120" width="165" height="130" rx="6" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+<!-- (b) 5.1 V buck -> 470 uF -> Pi pins 2/4 + 5 V rail loads -->
+<rect x="1000" y="470" width="150" height="130" rx="6" fill="#ffebee" stroke="#c62828" stroke-width="2"/>
+<line x1="1179" y1="576" x2="1201" y2="576" stroke="#222" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M1179,587.0 Q1190,581.0 1201,587.0" fill="none" stroke="#222" stroke-width="2.4"/>
+<rect x="1290" y="410" width="270" height="40" rx="5" fill="#fff" stroke="#c62828" stroke-width="1.4"/>
+<rect x="1290" y="460" width="270" height="32" rx="5" fill="#fff" stroke="#c62828" stroke-width="1.4"/>
+<rect x="1290" y="498" width="270" height="32" rx="5" fill="#fff" stroke="#c62828" stroke-width="1.4"/>
+<rect x="1290" y="536" width="270" height="32" rx="5" fill="#fff" stroke="#c62828" stroke-width="1.4"/>
+<rect x="1290" y="574" width="270" height="32" rx="5" fill="#fff" stroke="#c62828" stroke-width="1.4"/>
+<!-- (c) battery-sense divider -> MCP3008 CH1 -->
+<rect x="869" y="835.5" width="22" height="9" fill="#fff" stroke="#222" stroke-width="1.5"/>
+<rect x="935.5" y="869" width="9" height="22" fill="#fff" stroke="#222" stroke-width="1.5"/>
+<line x1="981" y1="877" x2="999" y2="877" stroke="#222" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="981" y1="883" x2="999" y2="883" stroke="#222" stroke-width="2.2" stroke-linecap="round"/>
+<rect x="1100" y="800" width="170" height="84" rx="6" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="2"/>
+<!-- Notes: battery safety, wire gauges, colours -->
+<rect x="30" y="480" width="560" height="150" rx="8" fill="#fff3f3" stroke="#c62828" stroke-width="2"/>
+<rect x="30" y="646" width="560" height="118" rx="8" fill="#fafafa" stroke="#9e9e9e" stroke-width="1.2"/>
+<rect x="30" y="780" width="560" height="128" rx="8" fill="#fafafa" stroke="#9e9e9e" stroke-width="1.2"/>
+<line x1="44" y1="820" x2="84" y2="820" stroke="#ad1457" stroke-width="5" stroke-linecap="round"/>
+<line x1="44" y1="842" x2="84" y2="842" stroke="#7f0000" stroke-width="5" stroke-linecap="round"/>
+<line x1="44" y1="864" x2="84" y2="864" stroke="#d32f2f" stroke-width="3.5" stroke-linecap="round"/>
+<line x1="316" y1="820" x2="356" y2="820" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round"/>
+<line x1="316" y1="842" x2="356" y2="842" stroke="#00838f" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="316" y1="864" x2="356" y2="864" stroke="#333333" stroke-width="1.6" stroke-linecap="round"/>
+<rect x="30" y="922" width="560" height="70" rx="8" fill="#fafafa" stroke="#9e9e9e" stroke-width="1.2"/>
+<rect x="15" y="1026" width="1570" height="62" rx="8" fill="#fff8e1" stroke="#c62828" stroke-width="2.2"/>
+</g><g id="wires">
+<!-- cell link -->
+<path class="w" d="M114,160 L125,160" stroke="#ad1457" stroke-width="4"/>
+<path class="w" d="M189,160 L200,160" stroke="#ad1457" stroke-width="4"/>
+<path class="w" d="M264,160 L275,160" stroke="#ad1457" stroke-width="4"/>
+<!-- pack - -&gt; BMS B- -->
+<path class="w" d="M50,160 L40,160 L40,250" stroke="#1a1a1a" stroke-width="5.0"/>
+<!-- balance lead -->
+<path class="w" d="M119.5,160 L119.5,250" stroke="#333333" stroke-width="1.6"/>
+<path class="w" d="M194.5,160 L194.5,250" stroke="#333333" stroke-width="1.6"/>
+<path class="w" d="M269.5,160 L269.5,250" stroke="#333333" stroke-width="1.6"/>
+<!-- pack + -&gt; fuse -->
+<path class="w" d="M339,160 L395,160" stroke="#ad1457" stroke-width="5.0"/>
+<!-- balance lead B+ -->
+<path class="w" d="M352,160 L352,250" stroke="#333333" stroke-width="1.6"/>
+<path class="w" d="M395,160 L465,160" stroke="#333333" stroke-width="1.6"/>
+<!-- fuse -&gt; XT60 + -->
+<path class="w" d="M465,160 L520,160" stroke="#ad1457" stroke-width="5.0"/>
+<!-- XT60 + -&gt; main switch -->
+<path class="w" d="M566,160 L630,160" stroke="#ad1457" stroke-width="5.0"/>
+<!-- main switch -&gt; BAT+ bus -->
+<path class="w" d="M698,160 L780,160" stroke="#ad1457" stroke-width="5.0"/>
+<!-- BMS P- -&gt; XT60 - -->
+<path class="w" d="M370,300 L480.5,300 A4.5,4.5 0 0 1 489.5,300 L505,300 L505,210 L520,210" stroke="#1a1a1a" stroke-width="5.0"/>
+<!-- XT60 - -&gt; common ground bus -->
+<path class="w" d="M566,210 L620,210 L620,1000" stroke="#1a1a1a" stroke-width="5.0"/>
+<!-- charger - -&gt; BMS P- -->
+<path class="w" d="M300,404 L450,404 L450,300" stroke="#1a1a1a" stroke-width="3.2"/>
+<!-- charger + -&gt; P+ (after fuse) -->
+<path class="w" d="M300,440 L485,440 L485,160" stroke="#ad1457" stroke-width="3.2"/>
+<!-- BAT+ distribution bus -->
+<path class="w" d="M780,160 L780,840" stroke="#ad1457" stroke-width="5.0"/>
+<!-- BAT+ -&gt; SERVO E-STOP -->
+<path class="w" d="M780,160 L836,160" stroke="#ad1457" stroke-width="5.0"/>
+<!-- SERVO E-STOP -&gt; 6 V buck IN+ -->
+<path class="w" d="M924,160 L1000,160" stroke="#ad1457" stroke-width="5.0"/>
+<!-- 6 V buck OUT+ -&gt; distribution -->
+<path class="w" d="M1150,160 L1230,160" stroke="#7f0000" stroke-width="5.0"/>
+<path class="w" d="M1190,160 L1190,226" stroke="#333333" stroke-width="1.6"/>
+<path class="w" d="M1190,234 L1190,300" stroke="#333333" stroke-width="1.6"/>
+<!-- distribution -&gt; PCA9685 V+ -->
+<path class="w" d="M1355,160 L1395,160" stroke="#7f0000" stroke-width="5.0"/>
+<!-- servo branch ground -&gt; spine -->
+<path class="w" d="M1075,250 L1075,300 L1580,300 L1580,1000" stroke="#1a1a1a" stroke-width="5.0"/>
+<!-- distribution GND -->
+<path class="w" d="M1292,250 L1292,300" stroke="#1a1a1a" stroke-width="5.0"/>
+<!-- PCA9685 servo GND -->
+<path class="w" d="M1477,250 L1477,300" stroke="#1a1a1a" stroke-width="5.0"/>
+<!-- BAT+ -&gt; 5.1 V buck IN+ -->
+<path class="w" d="M780,520 L1000,520" stroke="#ad1457" stroke-width="3.5"/>
+<!-- 5.1 V buck OUT+ -&gt; 5 V rail -->
+<path class="w" d="M1150,520 L1230,520" stroke="#d32f2f" stroke-width="3.5"/>
+<path class="w" d="M1190,520 L1190,576" stroke="#333333" stroke-width="1.6"/>
+<path class="w" d="M1190,584 L1190,640" stroke="#333333" stroke-width="1.6"/>
+<!-- 5 V rail -->
+<path class="w" d="M1230,430 L1230,590" stroke="#d32f2f" stroke-width="3.5"/>
+<!-- 5 V rail -&gt; Raspberry Pi 3B/3B+  →  header pins 2 &amp; 4 (5 V) -->
+<path class="w" d="M1230,430 L1290,430" stroke="#d32f2f" stroke-width="3.5"/>
+<!-- Raspberry Pi 3B/3B+  →  header pins 2 &amp; 4 (5 V) GND -&gt; spine -->
+<path class="w" d="M1560,430 L1580,430" stroke="#1a1a1a" stroke-width="3.5"/>
+<!-- 5 V rail -&gt; HC-SR04  ≈ 15 mA -->
+<path class="w" d="M1230,476 L1290,476" stroke="#d32f2f" stroke-width="2.6"/>
+<!-- HC-SR04  ≈ 15 mA GND -&gt; spine -->
+<path class="w" d="M1560,476 L1580,476" stroke="#1a1a1a" stroke-width="2.6"/>
+<!-- 5 V rail -&gt; MQ-2 heater  ≈ 150 mA -->
+<path class="w" d="M1230,514 L1290,514" stroke="#d32f2f" stroke-width="2.6"/>
+<!-- MQ-2 heater  ≈ 150 mA GND -&gt; spine -->
+<path class="w" d="M1560,514 L1580,514" stroke="#1a1a1a" stroke-width="2.6"/>
+<!-- 5 V rail -&gt; MAX98357A  ≤ ≈ 0.8 A peaks -->
+<path class="w" d="M1230,552 L1290,552" stroke="#d32f2f" stroke-width="2.6"/>
+<!-- MAX98357A  ≤ ≈ 0.8 A peaks GND -&gt; spine -->
+<path class="w" d="M1560,552 L1580,552" stroke="#1a1a1a" stroke-width="2.6"/>
+<!-- 5 V rail -&gt; Buzzer  ≈ 30 mA -->
+<path class="w" d="M1230,590 L1290,590" stroke="#d32f2f" stroke-width="2.6"/>
+<!-- Buzzer  ≈ 30 mA GND -&gt; spine -->
+<path class="w" d="M1560,590 L1580,590" stroke="#1a1a1a" stroke-width="2.6"/>
+<!-- Pi branch ground -&gt; spine -->
+<path class="w" d="M1075,600 L1075,640 L1580,640" stroke="#1a1a1a" stroke-width="3.5"/>
+<!-- BAT+ -&gt; 100k -->
+<path class="w" d="M780,840 L850,840" stroke="#ad1457" stroke-width="2.6"/>
+<path class="w" d="M850,840 L910,840" stroke="#333333" stroke-width="1.6"/>
+<!-- divider node -&gt; MCP3008 CH1 -->
+<path class="w" d="M910,840 L1100,840" stroke="#00838f" stroke-width="2.6"/>
+<path class="w" d="M940,840 L940,920" stroke="#333333" stroke-width="1.6"/>
+<path class="w" d="M990,840 L990,877" stroke="#333333" stroke-width="1.6"/>
+<path class="w" d="M990,883 L990,920" stroke="#333333" stroke-width="1.6"/>
+<!-- sense branch ground -&gt; spine -->
+<path class="w" d="M940,920 L1580,920" stroke="#1a1a1a" stroke-width="2.6"/>
+<!-- MCP3008 GND -->
+<path class="w" d="M1185,884 L1185,920" stroke="#1a1a1a" stroke-width="2.6"/>
+<!-- common ground bus -->
+<path class="w" d="M620,1000 L1580,1000" stroke="#1a1a1a" stroke-width="5.0"/>
+</g><g id="junctions">
+<circle cx="119.5" cy="160" r="3.6" fill="#111"/>
+<circle cx="194.5" cy="160" r="3.6" fill="#111"/>
+<circle cx="269.5" cy="160" r="3.6" fill="#111"/>
+<circle cx="352" cy="160" r="3.6" fill="#111"/>
+<circle cx="485" cy="160" r="3.6" fill="#111"/>
+<circle cx="450" cy="300" r="3.6" fill="#111"/>
+<circle cx="780" cy="520" r="3.6" fill="#111"/>
+<circle cx="1190" cy="160" r="3.6" fill="#111"/>
+<circle cx="1190" cy="300" r="3.6" fill="#111"/>
+<circle cx="1292" cy="300" r="3.6" fill="#111"/>
+<circle cx="1477" cy="300" r="3.6" fill="#111"/>
+<circle cx="1190" cy="520" r="3.6" fill="#111"/>
+<circle cx="1230" cy="520" r="3.6" fill="#111"/>
+<circle cx="1580" cy="430" r="3.6" fill="#111"/>
+<circle cx="1580" cy="476" r="3.6" fill="#111"/>
+<circle cx="1230" cy="476" r="3.6" fill="#111"/>
+<circle cx="1580" cy="514" r="3.6" fill="#111"/>
+<circle cx="1230" cy="514" r="3.6" fill="#111"/>
+<circle cx="1580" cy="552" r="3.6" fill="#111"/>
+<circle cx="1230" cy="552" r="3.6" fill="#111"/>
+<circle cx="1580" cy="590" r="3.6" fill="#111"/>
+<circle cx="1190" cy="640" r="3.6" fill="#111"/>
+<circle cx="1580" cy="640" r="3.6" fill="#111"/>
+<circle cx="940" cy="840" r="3.6" fill="#111"/>
+<circle cx="990" cy="840" r="3.6" fill="#111"/>
+<circle cx="990" cy="920" r="3.6" fill="#111"/>
+<circle cx="1185" cy="920" r="3.6" fill="#111"/>
+<circle cx="1580" cy="920" r="3.6" fill="#111"/>
+</g><g id="labels">
+<text x="30" y="40" font-size="24" font-weight="bold" fill="#111">HUMANOID ROBOT — POWER DIAGRAM</text>
+<text x="30" y="62" font-size="12.5" fill="#444">Sheet 2 of 2  ·  4S Li-ion pack → 20 A fuse → XT60 + main switch → servo, Pi and battery-sense branches  ·  every ground is joined</text>
+<text x="1580" y="40" font-size="11" text-anchor="end" fill="#444">Signals: wiring_diagram.svg  ·  steps and checklist: WIRING.md</text>
+<text x="30" y="100" font-size="13" font-weight="bold" fill="#880e4f">BATTERY  4 × 18650 in 4S</text>
+<text x="232" y="100" font-size="11" fill="#880e4f">14.8 V nominal · 16.8 V full · 13.2 V low</text>
+<text x="80" y="158" font-size="11" font-weight="bold" text-anchor="middle" fill="#880e4f">C1</text>
+<text x="80" y="171" font-size="9.5" text-anchor="middle" fill="#880e4f">3.7 V</text>
+<text x="56" y="139" font-size="11" font-weight="bold" text-anchor="middle" fill="#880e4f">−</text>
+<text x="108" y="139" font-size="11" font-weight="bold" text-anchor="middle" fill="#880e4f">+</text>
+<text x="155" y="158" font-size="11" font-weight="bold" text-anchor="middle" fill="#880e4f">C2</text>
+<text x="155" y="171" font-size="9.5" text-anchor="middle" fill="#880e4f">3.7 V</text>
+<text x="131" y="139" font-size="11" font-weight="bold" text-anchor="middle" fill="#880e4f">−</text>
+<text x="183" y="139" font-size="11" font-weight="bold" text-anchor="middle" fill="#880e4f">+</text>
+<text x="230" y="158" font-size="11" font-weight="bold" text-anchor="middle" fill="#880e4f">C3</text>
+<text x="230" y="171" font-size="9.5" text-anchor="middle" fill="#880e4f">3.7 V</text>
+<text x="206" y="139" font-size="11" font-weight="bold" text-anchor="middle" fill="#880e4f">−</text>
+<text x="258" y="139" font-size="11" font-weight="bold" text-anchor="middle" fill="#880e4f">+</text>
+<text x="305" y="158" font-size="11" font-weight="bold" text-anchor="middle" fill="#880e4f">C4</text>
+<text x="305" y="171" font-size="9.5" text-anchor="middle" fill="#880e4f">3.7 V</text>
+<text x="281" y="139" font-size="11" font-weight="bold" text-anchor="middle" fill="#880e4f">−</text>
+<text x="333" y="139" font-size="11" font-weight="bold" text-anchor="middle" fill="#880e4f">+</text>
+<text x="205" y="230" font-size="10" font-style="italic" text-anchor="middle" fill="#555">balance leads (22 AWG)</text>
+<rect x="37" y="247" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<text x="40" y="265" font-size="10" text-anchor="middle">B−</text>
+<rect x="116.5" y="247" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<text x="119.5" y="265" font-size="10" text-anchor="middle">B1</text>
+<rect x="191.5" y="247" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<text x="194.5" y="265" font-size="10" text-anchor="middle">B2</text>
+<rect x="266.5" y="247" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<text x="269.5" y="265" font-size="10" text-anchor="middle">B3</text>
+<rect x="349" y="247" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<text x="352" y="265" font-size="10" text-anchor="middle">B+</text>
+<text x="200" y="292" font-size="13" font-weight="bold" text-anchor="middle" fill="#311b92">4S 20 A BMS  (common port)</text>
+<text x="200" y="308" font-size="10" text-anchor="middle" fill="#333">cell protection + balancing; P+ = pack + (straight through)</text>
+<text x="200" y="322" font-size="10" text-anchor="middle" fill="#333">load and charger both use P− / P+</text>
+<rect x="367" y="297" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<text x="363" y="303.8" font-size="10" text-anchor="end">P−</text>
+<text x="430" y="144" font-size="11" font-weight="bold" text-anchor="middle">20 A FUSE</text>
+<text x="430" y="185" font-size="9.5" text-anchor="middle" fill="#555">close to the pack</text>
+<text x="543" y="129" font-size="11" font-weight="bold" text-anchor="middle">XT60</text>
+<text x="543" y="164" font-size="13" font-weight="bold" text-anchor="middle">+</text>
+<text x="543" y="214" font-size="13" font-weight="bold" text-anchor="middle">−</text>
+<text x="665" y="132" font-size="11" font-weight="bold" text-anchor="middle">MAIN SWITCH</text>
+<text x="665" y="182" font-size="9.5" text-anchor="middle" fill="#555">≥ 20 A DC</text>
+<rect x="706.55" y="151" width="66.9" height="18" rx="9" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="740" y="164" font-size="10" font-weight="bold" text-anchor="middle" fill="#333">12–14 AWG</text>
+<rect x="566.55" y="201" width="66.9" height="18" rx="9" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="600" y="214" font-size="10" font-weight="bold" text-anchor="middle" fill="#333">12–14 AWG</text>
+<text x="165" y="400" font-size="12" font-weight="bold" text-anchor="middle" fill="#6a1b9a">CHARGER PORT  (DC 5.5 × 2.5 mm)</text>
+<text x="165" y="416" font-size="10.5" text-anchor="middle" fill="#333">16.8 V 4S Li-ion CC/CV charger ONLY</text>
+<text x="165" y="429.5" font-size="10.5" text-anchor="middle" fill="#333">charge with the main switch OFF</text>
+<rect x="297" y="401" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<rect x="297" y="437" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<text x="294" y="408" font-size="12" font-weight="bold" text-anchor="end">−</text>
+<text x="294" y="444" font-size="12" font-weight="bold" text-anchor="end">+</text>
+<rect x="367.7" y="431" width="48.6" height="18" rx="9" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="392" y="444" font-size="10" font-weight="bold" text-anchor="middle" fill="#333">18 AWG</text>
+<text x="770" y="500" font-size="11" font-weight="bold" text-anchor="middle" fill="#880e4f" transform="rotate(-90 770 500)">BAT+ after fuse + switch  (13.2–16.8 V)</text>
+<text x="800" y="104" font-size="13" font-weight="bold" fill="#7f0000">(a) SERVO POWER</text>
+<text x="880" y="196" font-size="13" font-weight="bold" text-anchor="middle" fill="#b71c1c">SERVO E-STOP</text>
+<text x="880" y="211" font-size="10.5" text-anchor="middle" fill="#5d1010">cuts servo power only —</text>
+<text x="880" y="224.5" font-size="10.5" text-anchor="middle" fill="#5d1010">the robot will go limp / fall</text>
+<text x="880" y="238" font-size="10.5" text-anchor="middle" fill="#5d1010">latching mushroom, ≥ 10 A DC</text>
+<text x="880" y="251.5" font-size="10.5" text-anchor="middle" fill="#5d1010">≈ 7 A peak here at 14.8 V</text>
+<text x="880" y="265" font-size="10.5" text-anchor="middle" fill="#5d1010">(≈ 15 A if it were at 6 V)</text>
+<rect x="928.55" y="151" width="66.9" height="18" rx="9" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="962" y="164" font-size="10" font-weight="bold" text-anchor="middle" fill="#333">12–14 AWG</text>
+<text x="1075" y="142" font-size="13" font-weight="bold" text-anchor="middle" fill="#7f0000">6 V SERVO BUCK</text>
+<text x="1075" y="184" font-size="10.5" text-anchor="middle" fill="#333">high current</text>
+<text x="1075" y="197.5" font-size="10.5" text-anchor="middle" fill="#333">(20 A design target)</text>
+<text x="1075" y="211" font-size="10.5" text-anchor="middle" fill="#333">set 6.0 V with a meter</text>
+<text x="1075" y="224.5" font-size="10.5" text-anchor="middle" fill="#333">before servos connect</text>
+<rect x="997" y="157" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<text x="1007" y="163.8" font-size="9.5">IN+</text>
+<rect x="1147" y="157" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<text x="1143" y="163.8" font-size="9.5" text-anchor="end">OUT+</text>
+<rect x="1072" y="247" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<text x="1075" y="242" font-size="9.5" text-anchor="middle">GND</text>
+<text x="1176" y="223" font-size="11" font-weight="bold" text-anchor="end">+</text>
+<text x="1206" y="246" font-size="10.5" fill="#333">1000 µF</text>
+<text x="1206" y="259" font-size="10.5" fill="#333">≥ 10 V</text>
+<text x="1292.5" y="142" font-size="12" font-weight="bold" text-anchor="middle" fill="#7f0000">SERVO POWER</text>
+<text x="1292.5" y="158" font-size="10.5" text-anchor="middle" fill="#333">DISTRIBUTION</text>
+<text x="1292.5" y="171.5" font-size="10.5" text-anchor="middle" fill="#333">6 V bus bar /</text>
+<text x="1292.5" y="185" font-size="10.5" text-anchor="middle" fill="#333">terminal board</text>
+<rect x="1227" y="157" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<rect x="1352" y="157" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<rect x="1289" y="247" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<text x="1292" y="242" font-size="9.5" text-anchor="middle">GND</text>
+<text x="1477.5" y="142" font-size="12" font-weight="bold" text-anchor="middle" fill="#1565c0">PCA9685 V+ / GND</text>
+<text x="1477.5" y="158" font-size="10.5" text-anchor="middle" fill="#333">screw terminal → servo</text>
+<text x="1477.5" y="171.5" font-size="10.5" text-anchor="middle" fill="#333">header V+ row → 9 servos</text>
+<text x="1477.5" y="185" font-size="10.5" text-anchor="middle" fill="#333">CH0–5: 6 × MG996R (legs)</text>
+<text x="1477.5" y="198.5" font-size="10.5" text-anchor="middle" fill="#333">CH6–8: 3 × MG90S</text>
+<rect x="1392" y="157" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<rect x="1474" y="247" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<text x="1477" y="242" font-size="9.5" text-anchor="middle">GND</text>
+<rect x="1353.75" y="151" width="42.5" height="18" rx="9" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="1375" y="164" font-size="10" font-weight="bold" text-anchor="middle" fill="#333">12–14</text>
+<rect x="1206.55" y="291" width="66.9" height="18" rx="9" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="1240" y="304" font-size="10" font-weight="bold" text-anchor="middle" fill="#333">12–14 AWG</text>
+<text x="1000" y="328" font-size="10.5" fill="#5d1010">6 × MG996R can pull ≈ 15 A together at stall: keep the 6 V and its ground short and thick.</text>
+<text x="1000" y="342" font-size="10.5" fill="#5d1010">If your PCA9685 board has thin V+ traces, take the servo red/brown wires from the</text>
+<text x="1000" y="356" font-size="10.5" fill="#5d1010">distribution board and plug only the orange signal wires into the PCA9685.</text>
+<text x="1000" y="370" font-size="10.5" fill="#5d1010">Software stop as well: GPIO22 drives PCA9685 OE HIGH = all servo pulses off.</text>
+<text x="800" y="404" font-size="13" font-weight="bold" fill="#d32f2f">(b) PI + 5 V RAIL</text>
+<rect x="875.7" y="511" width="48.6" height="18" rx="9" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="900" y="524" font-size="10" font-weight="bold" text-anchor="middle" fill="#333">18 AWG</text>
+<text x="1075" y="494" font-size="13" font-weight="bold" text-anchor="middle" fill="#c62828">5.1 V BUCK</text>
+<text x="1075" y="540" font-size="10.5" text-anchor="middle" fill="#333">≥ 5 A</text>
+<text x="1075" y="553.5" font-size="10.5" text-anchor="middle" fill="#333">set 5.10 V with a</text>
+<text x="1075" y="567" font-size="10.5" text-anchor="middle" fill="#333">meter before the Pi</text>
+<text x="1075" y="580.5" font-size="10.5" text-anchor="middle" fill="#333">is connected</text>
+<rect x="997" y="517" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<text x="1007" y="523.8" font-size="9.5">IN+</text>
+<rect x="1147" y="517" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<text x="1143" y="523.8" font-size="9.5" text-anchor="end">OUT+</text>
+<rect x="1072" y="597" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<text x="1075" y="592" font-size="9.5" text-anchor="middle">GND</text>
+<text x="1176" y="573" font-size="11" font-weight="bold" text-anchor="end">+</text>
+<text x="1150" y="616" font-size="10.5" text-anchor="end" fill="#333">470 µF</text>
+<text x="1150" y="629" font-size="10.5" text-anchor="end" fill="#333">≥ 10 V</text>
+<text x="1238" y="418" font-size="11" font-weight="bold" fill="#d32f2f">5V RAIL</text>
+<text x="1300" y="424" font-size="10.5" font-weight="bold">Raspberry Pi 3B/3B+  →  header pins 2 &amp; 4 (5 V)</text>
+<text x="1300" y="439" font-size="9.5" fill="#555">GND pins 6 &amp; 14 · ≈ 2.5 A max</text>
+<rect x="1235.7" y="421" width="48.6" height="18" rx="9" fill="#ffffff" stroke="#555" stroke-width="1"/>
+<text x="1260" y="434" font-size="10" font-weight="bold" text-anchor="middle" fill="#333">18 AWG</text>
+<text x="1300" y="472" font-size="10.5" font-weight="bold">HC-SR04  ≈ 15 mA</text>
+<text x="1300" y="485" font-size="9.5" fill="#555">VCC from 5 V (pin 2 net)</text>
+<text x="1300" y="510" font-size="10.5" font-weight="bold">MQ-2 heater  ≈ 150 mA</text>
+<text x="1300" y="523" font-size="9.5" fill="#555">warms up 1–2 min</text>
+<text x="1300" y="548" font-size="10.5" font-weight="bold">MAX98357A  ≤ ≈ 0.8 A peaks</text>
+<text x="1300" y="561" font-size="9.5" fill="#555">3 W into a 4 Ω speaker</text>
+<text x="1300" y="586" font-size="10.5" font-weight="bold">Buzzer  ≈ 30 mA</text>
+<text x="1300" y="599" font-size="9.5" fill="#555">switched by the NPN</text>
+<text x="1000" y="668" font-size="10.5" fill="#7f0000">Powering the Pi 3B through pins 2/4 bypasses its input protection: set the buck to</text>
+<text x="1000" y="682" font-size="10.5" fill="#7f0000">5.10 V first, and NEVER plug in micro-USB at the same time.</text>
+<text x="800" y="764" font-size="13" font-weight="bold" fill="#00838f">(c) BATTERY SENSE</text>
+<text x="800" y="780" font-size="10.5" fill="#555">thin wire (22 AWG) — a few µA only</text>
+<text x="880" y="830" font-size="11" text-anchor="middle">100 kΩ</text>
+<text x="932" y="884" font-size="11" text-anchor="end">22 kΩ</text>
+<text x="1002" y="884" font-size="11">100 nF</text>
+<text x="1185" y="822" font-size="12" font-weight="bold" text-anchor="middle" fill="#7b1fa2">MCP3008  CH1</text>
+<text x="1185" y="838" font-size="10.5" text-anchor="middle" fill="#333">SPI → Pi (CE0, pin 24)</text>
+<text x="1185" y="851.5" font-size="10.5" text-anchor="middle" fill="#333">VREF = 3.3 V</text>
+<rect x="1097" y="837" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<rect x="1182" y="881" width="6" height="6" fill="#111" stroke="#111" stroke-width="1"/>
+<text x="1185" y="876" font-size="9.5" text-anchor="middle">GND</text>
+<text x="1290" y="830" font-size="10.5" fill="#4a126b">16.8 V × 22 / 122 = 3.03 V max</text>
+<text x="1290" y="844" font-size="10.5" fill="#4a126b">software (config/defaults.json):</text>
+<text x="1290" y="858" font-size="10.5" fill="#4a126b">warn &lt; 13.6 V · clean shutdown</text>
+<text x="1290" y="872" font-size="10.5" fill="#4a126b">after 30 s below 13.2 V</text>
+<text x="1100" y="990" font-size="11.5" font-weight="bold" text-anchor="middle">COMMON GROUND BUS — battery P−, both bucks, servos, Pi GND pins, sense divider</text>
+<text x="1574" y="288" font-size="10" font-weight="bold" text-anchor="end">GND</text>
+<text x="44" y="502" font-size="13.5" font-weight="bold" fill="#b71c1c">⚠  4S LITHIUM PACK SAFETY</text>
+<text x="44" y="522" font-size="10.5" fill="#3e1111">A 4S 18650 pack must be built or checked by a qualified person.</text>
+<text x="44" y="537" font-size="10.5" fill="#3e1111">Use 4 matched cells (same model, capacity and state of charge), a 4S BMS</text>
+<text x="44" y="552" font-size="10.5" fill="#3e1111">and a 16.8 V 4S charger. Never solder directly to cells without spot-welded</text>
+<text x="44" y="567" font-size="10.5" fill="#3e1111">tabs, never charge unattended, and keep the pack away from metal parts.</text>
+<text x="44" y="582" font-size="10.5" fill="#3e1111">A shorted pack can deliver more than 50 A — that is what the fuse is for.</text>
+<text x="44" y="597" font-size="10.5" fill="#3e1111">Do not mix this 4S design with the older 2S2P charger or BMS.</text>
+<text x="44" y="668" font-size="13" font-weight="bold">WIRE GAUGES</text>
+<text x="44" y="688" font-size="10.5" font-weight="bold">12–14 AWG</text>
+<text x="124" y="688" font-size="10.5" fill="#333">pack, fuse, XT60, main switch, SERVO E-STOP, 6 V buck in/out,</text>
+<text x="124" y="705" font-size="10.5" fill="#333">servo distribution, servo grounds, ground bus near the bucks</text>
+<text x="44" y="722" font-size="10.5" font-weight="bold">18 AWG</text>
+<text x="124" y="722" font-size="10.5" fill="#333">5.1 V buck in/out → Pi pins 2/4 and 6/14, charger port</text>
+<text x="44" y="739" font-size="10.5" font-weight="bold">20–22 AWG</text>
+<text x="124" y="739" font-size="10.5" fill="#333">signals, balance leads, battery sense, small 5 V loads</text>
+<text x="44" y="802" font-size="13" font-weight="bold">COLOURS</text>
+<text x="94" y="824" font-size="11">Battery + (13.2–16.8 V)</text>
+<text x="94" y="846" font-size="11">6 V servo power</text>
+<text x="94" y="868" font-size="11">5 V</text>
+<text x="366" y="824" font-size="11">GND (all joined)</text>
+<text x="366" y="846" font-size="11">Analog sense</text>
+<text x="366" y="868" font-size="11">Balance leads / parts</text>
+<text x="44" y="896" font-size="10.5" fill="#555">White pill on a wire = wire gauge.  Dot = joined.</text>
+<text x="44" y="944" font-size="13" font-weight="bold">FIRST POWER-UP</text>
+<text x="44" y="962" font-size="10.5" fill="#333">Set the 6 V and 5.1 V bucks with a meter BEFORE anything is connected.</text>
+<text x="44" y="976" font-size="10.5" fill="#333">Power the Pi alone first, then add the parts one at a time (WIRING.md).</text>
+<text x="800" y="1052" font-size="18" font-weight="bold" text-anchor="middle" fill="#b71c1c">⚠  COMMON GROUND required   •   NEVER power servos from the Pi   •   Pi GPIO is 3.3 V ONLY</text>
+<text x="800" y="1075" font-size="12.5" text-anchor="middle" fill="#333">The SERVO E-STOP only removes servo power — the Pi keeps running. Turn the main switch OFF before changing any wiring.</text>
+</g></svg>

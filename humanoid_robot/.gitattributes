@@ -1,0 +1,6 @@
+# Shell scripts and Linux config files must keep LF line endings,
+# otherwise bash on the Raspberry Pi fails with "$'\r': command not found".
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.wav binary

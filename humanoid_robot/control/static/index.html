@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0e1116">
+  <title>Robot Controller</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span id="conn" class="dot" title="Connection"></span><span id="robot-name">Humanoid Robot</span></div>
+    <div class="badges">
+      <span id="state" class="badge state-STARTING">CONNECTING</span>
+      <span id="battery" class="badge" title="Battery">BAT --</span>
+      <span id="sd" class="badge" title="SD card protection">SD --</span>
+    </div>
+  </header>
+
+  <div id="banner" class="banner hidden" role="alert">
+    <span id="banner-text"></span>
+    <button id="silence" class="small">Silence</button>
+  </div>
+
+  <main class="layout">
+    <section class="card video-card" aria-label="Camera">
+      <div class="video-wrap">
+        <img id="video" alt="Live camera view from the robot">
+        <div id="video-off" class="video-off">Video is off. Tap "Start video".</div>
+      </div>
+      <div class="row">
+        <button id="video-toggle" class="small">Start video</button>
+        <span id="note" class="note"></span>
+      </div>
+    </section>
+
+    <section class="card drive-card" aria-label="Driving">
+      <div class="drive">
+        <div id="joystick" class="joystick" aria-label="Joystick. Drag to walk.">
+          <div class="joy-dead"></div>
+          <span class="joy-label up">FWD</span>
+          <span class="joy-label down">BACK</span>
+          <span class="joy-label left">L</span>
+          <span class="joy-label right">R</span>
+          <div id="knob" class="joy-knob"></div>
+        </div>
+        <div class="drive-side">
+          <div id="drive-readout" class="readout">STOPPED</div>
+          <div class="dpad" aria-label="Direction buttons">
+            <button class="up" data-drive="0,1" aria-label="Forward">&#9650;</button>
+            <button class="left" data-drive="-1,0" aria-label="Turn left">&#9664;</button>
+            <button id="stop" class="stop" aria-label="Stop">STOP</button>
+            <button class="right" data-drive="1,0" aria-label="Turn right">&#9654;</button>
+            <button class="down" data-drive="0,-1" aria-label="Backward">&#9660;</button>
+          </div>
+        </div>
+      </div>
+      <div class="estop-row">
+        <button id="estop" class="estop">EMERGENCY STOP</button>
+        <button id="reset" class="reset hidden">Release emergency stop</button>
+      </div>
+      <p class="note">Keyboard: arrows or W A S D to walk, Space = stop, Esc = emergency stop.</p>
+    </section>
+
+    <section class="card" aria-label="Mode and gestures">
+      <h2>Mode</h2>
+      <div id="modes" class="segmented">
+        <button data-mode="monitor">Monitor</button>
+        <button data-mode="manual">Manual</button>
+        <button data-mode="auto">Auto patrol</button>
+      </div>
+      <h2>Head</h2>
+      <input id="head" type="range" min="-1" max="1" step="0.05" value="0" aria-label="Head direction">
+      <div class="range-labels"><span>Left</span><button id="head-center" class="small">Center</button><span>Right</span></div>
+      <h2>Gestures</h2>
+      <div class="grid-buttons">
+        <button data-gesture="wave">Wave</button>
+        <button data-gesture="raise_arms">Raise arms</button>
+        <button data-gesture="look_around">Look around</button>
+      </div>
+    </section>
+
+    <section class="card" aria-label="Sensors">
+      <h2>Sensors</h2>
+      <div class="tiles">
+        <div id="t-distance" class="tile"><div class="label">Distance ahead</div><div class="value">--</div><div class="sub"></div></div>
+        <div id="t-temp" class="tile"><div class="label">Temperature</div><div class="value">--</div><div class="sub"></div></div>
+        <div id="t-hum" class="tile"><div class="label">Humidity</div><div class="value">--</div><div class="sub"></div></div>
+        <div id="t-gas" class="tile"><div class="label">Smoke / gas</div><div class="value">--</div><div class="sub"></div><div class="bar"><span></span></div></div>
+        <div id="t-bat" class="tile"><div class="label">Battery</div><div class="value">--</div><div class="sub"></div><div class="bar"><span></span></div></div>
+        <div id="t-cpu" class="tile"><div class="label">Raspberry Pi</div><div class="value">--</div><div class="sub"></div></div>
+      </div>
+    </section>
+
+    <section class="card" aria-label="Speak">
+      <h2>Speak</h2>
+      <div class="grid-buttons">
+        <button data-say="Hello! I am the Humanoid Robot. How can I help you?">Hello</button>
+        <button data-say="Please follow me.">Follow me</button>
+        <button data-say="Warning. Please keep a safe distance.">Keep distance</button>
+        <button data-say="Help is on the way. Please stay calm.">Help coming</button>
+      </div>
+      <form id="say-form" class="say-form">
+        <input id="say-text" maxlength="200" autocomplete="off" placeholder="Type something for the robot to say" aria-label="Text to speak">
+        <button class="primary" type="submit">Say</button>
+      </form>
+      <div class="last-said">Last spoken: <span id="last-said">-</span></div>
+    </section>
+
+    <section class="card" aria-label="Activity">
+      <h2>Activity</h2>
+      <ul id="events" class="list"></ul>
+      <h2>Startup checks</h2>
+      <ul id="checks" class="list"></ul>
+    </section>
+
+    <section id="sim-card" class="card sim hidden" aria-label="Simulator">
+      <h2>Simulator (PC test mode)</h2>
+      <label>Distance ahead: <b id="sim-distance-v"></b> cm (-1 = sensor broken)
+        <input id="sim-distance" type="range" min="-1" max="250" step="1"></label>
+      <label>Temperature: <b id="sim-temp-v"></b> &deg;C
+        <input id="sim-temp" type="range" min="0" max="80" step="0.5"></label>
+      <label>MQ-2 voltage: <b id="sim-gas-v"></b> V
+        <input id="sim-gas" type="range" min="0" max="3" step="0.05"></label>
+      <label>Battery: <b id="sim-bat-v"></b> V (below 6 V = no battery)
+        <input id="sim-bat" type="range" min="0" max="17" step="0.1"></label>
+      <label class="check"><input id="sim-protected" type="checkbox"> SD card protected mode</label>
+      <label class="check"><input id="sim-uv" type="checkbox"> Power supply under-voltage</label>
+    </section>
+  </main>
+
+  <footer class="footer"><a href="/settings">Settings, calibration &amp; SD card protection</a></footer>
+  <div id="toast" class="toast hidden" role="status"></div>
+  <script src="/static/joystick.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

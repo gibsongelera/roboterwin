@@ -1,0 +1,78 @@
+{
+  "_help": [
+    "Keyframes are OFFSETS in degrees from the home pose. Joints not listed are 0 (home).",
+    "Direction convention (fix mirrored servos with 'invert' in settings, never here):",
+    "  HIP +   = leg swings forward      KNEE + = knee bends, foot lifts",
+    "  ANKLE + = body rolls to the robot's RIGHT (weight onto the right foot); both ankles use the same sign",
+    "  HEAD +  = head turns to the robot's LEFT     ARM + = arm raises forward/up",
+    "Gaits loop forever while the joystick is held. Each frame takes motion.step_ms (scaled by speed).",
+    "Gestures play once; each frame has its own 'ms'. 'hold': true keeps the last pose (used for rest).",
+    "'derive' builds a gait from another one: 'negate' flips the sign of listed joints,",
+    "'mirror' swaps left/right joints and flips ANKLE and HEAD."
+  ],
+  "gaits": {
+    "walk_forward": {
+      "frames": [
+        {"R_ANKLE": 10, "L_ANKLE": 10, "R_HIP": 15, "L_HIP": -15},
+        {"R_ANKLE": 10, "L_ANKLE": 10, "L_HIP": 15, "L_KNEE": 25, "R_HIP": 0},
+        {"R_ANKLE": 10, "L_ANKLE": 10, "L_HIP": 15, "R_HIP": -15, "R_ARM": 10},
+        {"L_HIP": 15, "R_HIP": -15, "R_ARM": 10},
+        {"R_ANKLE": -10, "L_ANKLE": -10, "L_HIP": 15, "R_HIP": -15},
+        {"R_ANKLE": -10, "L_ANKLE": -10, "R_HIP": 15, "R_KNEE": 25, "L_HIP": 0},
+        {"R_ANKLE": -10, "L_ANKLE": -10, "R_HIP": 15, "L_HIP": -15, "L_ARM": 10},
+        {"R_HIP": 15, "L_HIP": -15, "L_ARM": 10}
+      ]
+    },
+    "walk_backward": {
+      "derive": {"from": "walk_forward", "negate": ["R_HIP", "L_HIP", "R_ARM", "L_ARM"]}
+    },
+    "turn_left": {
+      "frames": [
+        {"R_ANKLE": 10, "L_ANKLE": 10},
+        {"R_ANKLE": 10, "L_ANKLE": 10, "L_KNEE": 25, "L_HIP": -10},
+        {"R_ANKLE": 10, "L_ANKLE": 10, "L_HIP": -10},
+        {"L_HIP": -10},
+        {"R_ANKLE": -10, "L_ANKLE": -10, "L_HIP": -10},
+        {"R_ANKLE": -10, "L_ANKLE": -10, "R_KNEE": 25, "R_HIP": 10, "L_HIP": -10},
+        {"R_ANKLE": -10, "L_ANKLE": -10, "R_HIP": 10, "L_HIP": -10},
+        {}
+      ]
+    },
+    "turn_right": {
+      "derive": {"from": "turn_left", "mirror": true}
+    }
+  },
+  "gestures": {
+    "wave": [
+      {"ms": 500, "R_ARM": 75},
+      {"ms": 250, "R_ARM": 55},
+      {"ms": 250, "R_ARM": 75},
+      {"ms": 250, "R_ARM": 55},
+      {"ms": 250, "R_ARM": 75},
+      {"ms": 500}
+    ],
+    "raise_arms": [
+      {"ms": 700, "R_ARM": 75, "L_ARM": 75},
+      {"ms": 1200, "R_ARM": 75, "L_ARM": 75},
+      {"ms": 700}
+    ],
+    "look_around": [
+      {"ms": 700, "HEAD": 45},
+      {"ms": 500, "HEAD": 45},
+      {"ms": 1200, "HEAD": -45},
+      {"ms": 500, "HEAD": -45},
+      {"ms": 700, "HEAD": 0}
+    ],
+    "alarm_signal": [
+      {"ms": 400, "R_ARM": 80, "L_ARM": 80},
+      {"ms": 400, "R_ARM": 40, "L_ARM": 40},
+      {"ms": 400, "R_ARM": 80, "L_ARM": 80},
+      {"ms": 400, "R_ARM": 40, "L_ARM": 40},
+      {"ms": 400, "R_ARM": 80, "L_ARM": 80},
+      {"ms": 600}
+    ],
+    "rest": [
+      {"ms": 1500, "R_HIP": 15, "L_HIP": 15, "R_KNEE": 30, "L_KNEE": 30, "hold": true}
+    ]
+  }
+}

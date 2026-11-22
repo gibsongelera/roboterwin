@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# robot-maintenance: turn OFF SD card protection (MAINTENANCE mode), then reboot.
+#
+# Use this to install updates, change files or save calibration permanently.
+# While in maintenance mode ALWAYS shut down properly before switching the
+# power off (web Settings page "Shut down", the shutdown button, or
+# "sudo poweroff"). When finished:  sudo robot-protect
+#
+#   sudo robot-maintenance           ask, then disable protection and reboot
+#   sudo robot-maintenance --yes     no question (used by the web Settings page)
+set -euo pipefail
+
+YES=0
+REBOOT=1
+for arg in "$@"; do
+  case "$arg" in
+    -y|--yes) YES=1 ;;
+    --no-reboot) REBOOT=0 ;;
+    *) echo "unknown option: $arg" >&2; exit 2 ;;
+  esac
+done
+
+die() { printf '\033[1;31mERROR: %s\033[0m\n' "$*" >&2; exit 1; }
+[ "$(id -u)" -eq 0 ] || die "run with sudo"
+
+if [ -d /boot/firmware ]; then BOOT=/boot/firmware; else BOOT=/boot; fi
+CMDLINE="$BOOT/cmdline.txt"
+
+if ! grep -q "boot=overlay" /proc/cmdline && ! grep -q "boot=overlay" "$CMDLINE"; then
+  echo "Already in MAINTENANCE mode (SD card writable)."
+  exit 0
+fi
+
+if [ "$YES" -ne 1 ]; then
+  echo "This makes the SD card WRITABLE and reboots the Pi."
+  read -r -p "Switch to maintenance mode now? [y/N] " answer
+  [[ "$answer" =~ ^[Yy]$ ]] || { echo "Cancelled."; exit 1; }
+fi
+
+raspi-config nonint disable_overlayfs
+grep -q "boot=overlay" "$CMDLINE" && die "disabling the overlay failed (boot=overlay still in $CMDLINE)"
+sync
+
+echo "Done. After the reboot the robot is in MAINTENANCE mode."
+echo "The boot partition stays read-only; to edit it:  sudo mount -o remount,rw $BOOT"
+if [ "$REBOOT" -eq 1 ]; then
+  echo "Rebooting..."
+  systemctl reboot
+fi
