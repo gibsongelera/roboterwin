@@ -7,6 +7,7 @@ This guide takes you from a box of parts to a walking robot that you control wit
 | Document | What it covers |
 |---|---|
 | **BUILD_GUIDE.md** (this file) | Parts, assembly, software install, calibration, daily use |
+| [PI_SETUP_STEP_BY_STEP.md](PI_SETUP_STEP_BY_STEP.md) | Fresh Pi 3 + SD card: flash the OS, first boot, every command on the Pi |
 | [WIRING.md](WIRING.md) | Every wire, the GPIO pin table and the pre-power checklist |
 | [wiring_diagram.svg](wiring_diagram.svg) / [power_diagram.svg](power_diagram.svg) | Printable wiring and power diagrams |
 | [SD_CARD_PROTECTION.md](SD_CARD_PROTECTION.md) | How the SD card is protected against corruption |

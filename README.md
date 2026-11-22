@@ -7,6 +7,7 @@ A walking humanoid robot that watches for obstacles, smoke/gas and heat, warns p
 ## Start here
 
 1. **[docs/BUILD_GUIDE.md](docs/BUILD_GUIDE.md)**: step-by-step from parts to a walking robot
+   - **[docs/PI_SETUP_STEP_BY_STEP.md](docs/PI_SETUP_STEP_BY_STEP.md)**: fresh Pi 3 and SD card, from flashing the OS to every command on the Pi
 2. **[docs/WIRING.md](docs/WIRING.md)**: GPIO pin table and every wire, plus [wiring_diagram.svg](docs/wiring_diagram.svg) and [power_diagram.svg](docs/power_diagram.svg)
 3. **[docs/SD_CARD_PROTECTION.md](docs/SD_CARD_PROTECTION.md)**: how "never corrupt the SD card" works
 4. **[docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)**: what to do when a part fails
